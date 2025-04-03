@@ -1,0 +1,257 @@
+specs:
+  - name: ISO8583-Test
+    id: 3
+    header_fields:
+      - name: "$$header_mti$$"
+        id: 1
+        type: Fixed
+        size: 4
+        data_encoding: ASCII
+        children: []
+    messages:
+      - name: "1100 - Authorization"
+        header_match:
+          - "1100"
+          - "1110"
+        id: 1
+        fields:
+          - name: "Message Type"
+            id: 1
+            type: Fixed
+            size: 4
+            data_encoding: ASCII
+            constraints:
+              content_type: Numeric
+            children: []
+          - name: "Bitmap"
+            id: 2
+            type: Bitmapped
+            data_encoding: BINARY
+            children:
+              - name: "Primary Account Number"
+                id: 3
+                type: Variable
+                length_indicator_size: 2
+                length_indicator_encoding: ASCII
+                data_encoding: ASCII
+                position: 2
+                constraints:
+                  content_type: Numeric
+                  max_size: 19
+                  min_size: 12
+                content: "4432527611326119"
+              - name: "Processing Code"
+                id: 4
+                type: Fixed
+                size: 6
+                data_encoding: ASCII
+                position: 3
+                content: "000000"
+                children:
+                  - name: "Transaction Type"
+                    id: 5
+                    type: Fixed
+                    size: 2
+                    data_encoding: ASCII
+                    position: 1
+                  - name: "Acct From"
+                    id: 6
+                    type: Fixed
+                    size: 2
+                    data_encoding: ASCII
+                    position: 2
+                  - name: "Acct To"
+                    id: 7
+                    type: Fixed
+                    size: 2
+                    data_encoding: ASCII
+                    position: 3
+              - name: "Transaction Amount"
+                id: 8
+                type: Fixed
+                size: 12
+                data_encoding: ASCII
+                position: 4
+                content: "00000020000"
+              - name: "STAN"
+                id: 9
+                type: Fixed
+                size: 6
+                data_encoding: ASCII
+                key: true
+                position: 11
+                content: "024296"
+              - name: "Transmission Date & Time"
+                id: 16
+                type: Fixed
+                size: 10
+                data_encoding: ASCII
+                position: 7
+                content: "0304093247"
+              - name: "Local Transaction Time"
+                id: 12
+                type: Fixed
+                size: 6
+                data_encoding: ASCII
+                hint:
+                  type: "date_time"
+                  format: "HHmmss"
+                position: 12
+                content: "093247"
+              - name: "Local Transaction Date"
+                id: 13
+                type: Fixed
+                size: 4
+                data_encoding: ASCII
+                hint:
+                  type: "date_time"
+                  format: "MMdd"
+                position: 13
+                content: "0304"
+              - name: "Merchant Type"
+                id: 19
+                type: Fixed
+                size: 4
+                data_encoding: ASCII
+                position: 18
+                content: "5311"
+              - name: "Settlement Date"
+                id: 15
+                type: Fixed
+                size: 4
+                data_encoding: ASCII
+                position: 15
+                content: "1210"
+              - name: "Expiration Date"
+                id: 14
+                type: Fixed
+                size: 4
+                data_encoding: ASCII
+                position: 14
+                content: "2601"
+              - name: "POS Entry Mode"
+                id: 22
+                type: Fixed
+                size: 3
+                data_encoding: ASCII
+                position: 22
+                content: "011"
+              - name: "PIN Capture Code"
+                id: 26
+                type: Fixed
+                size: 2
+                data_encoding: ASCII
+                position: 26
+                content: "04"
+              - name: "Acquiring Institution ID"
+                id: 32
+                type: Fixed
+                size: 10
+                data_encoding: ASCII
+                position: 32
+                content: "2234567890"
+              - name: "Retrieval Reference Number"
+                id: 37
+                type: Fixed
+                size: 12
+                data_encoding: ASCII
+                position: 37
+                content: "V01209000008"
+              - name: "Card Acceptor Terminal ID"
+                id: 41
+                type: Fixed
+                size: 8
+                data_encoding: ASCII
+                position: 41
+                content: "TC 01100"
+              - name: "Card Acceptor ID Code"
+                id: 42
+                type: Fixed
+                size: 15
+                data_encoding: ASCII
+                position: 42
+                content: "900000000000090"
+              - name: "Card Acceptor Name & Location"
+                id: 43
+                type: Fixed
+                size: 40
+                data_encoding: ASCII
+                position: 43
+                content: "1301 MCKINNEY STE 2500 HOUSTON TXUS"
+              - name: "Merchant/Bank Name"
+                id: 48
+                type: Fixed
+                size: 30
+                data_encoding: ASCII
+                position: 48
+                content: "WWW.AMERICANAIRLINES.COM"
+              - name: "Transaction Currency Code"
+                id: 49
+                type: Fixed
+                size: 3
+                data_encoding: ASCII
+                position: 49
+                content: "840"
+              - name: "Authorization Life Cycle"
+                id: 57
+                type: Fixed
+                size: 3
+                data_encoding: ASCII
+                position: 57
+                content: "103"
+              - name: "National POS Condition Code"
+                id: 58
+                type: Fixed
+                size: 11
+                data_encoding: ASCII
+                position: 58
+                content: "1014100A251"
+              - name: "PSEUDO TERMINAL"
+                id: 63.1
+                type: Fixed
+                size: 6
+                data_encoding: ASCII
+                position: 63.1
+                content: "L30POS"
+              - name: "ACQUIRER NETWORK ID"
+                id: 63.3
+                type: Fixed
+                size: 3
+                data_encoding: ASCII
+                position: 63.3
+                content: "SVM"
+              - name: "PROCESSOR ID"
+                id: 63.4
+                type: Fixed
+                size: 6
+                data_encoding: ASCII
+                position: 63.4
+                content: "INTL34"
+              - name: "PROCESSING FLAGS"
+                id: 63.7
+                type: Fixed
+                size: 0
+                data_encoding: ASCII
+                position: 63.7
+                content: ""
+              - name: "Additional Data - Private Acquirer"
+                id: 111
+                type: Fixed
+                size: 27
+                data_encoding: ASCII
+                position: 111
+                content: "38400857918563800000V0000000"
+              - name: "TEXT INFO"
+                id: 124
+                type: Fixed
+                size: 35
+                data_encoding: ASCII
+                position: 124
+                content: "NI44PS40ID1615 0103 TR16L342012600000029"
+              - name: "Acquirer Trace Data"
+                id: 127
+                type: Fixed
+                size: 18
+                data_encoding: ASCII
+                position: 127
+                content: "101342012600000029"
